@@ -23,41 +23,22 @@
         .container { max-width: 1100px; margin: 0 auto; }
         header {
             background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%);
-            color: white;
-            padding: 22px 30px;
-            border-radius: 14px;
-            margin-bottom: 22px;
-            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.18);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            border-bottom: 4px solid #f59e0b;
+            color: white; padding: 22px 30px; border-radius: 14px; margin-bottom: 22px;
+            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.18); display: flex; align-items: center;
+            gap: 18px; border-bottom: 4px solid #f59e0b;
         }
         .logo-badge {
-            background: rgba(255, 255, 255, 0.12);
-            border: 1.5px solid rgba(251, 191, 36, 0.5);
-            width: 62px;
-            height: 62px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.12); border: 1.5px solid rgba(251, 191, 36, 0.5);
+            width: 62px; height: 62px; border-radius: 14px; display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0;
         }
         .brand-title {
-            font-size: 1.75rem;
-            font-weight: 800;
-            letter-spacing: 2.5px;
+            font-size: 1.75rem; font-weight: 800; letter-spacing: 2.5px;
             background: linear-gradient(to right, #ffffff, #fde68a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.1;
-            margin-bottom: 4px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            line-height: 1.1; margin-bottom: 4px;
         }
-        header p {
-            font-size: 0.88rem;
-            color: #e2e8f0;
-        }
+        header p { font-size: 0.88rem; color: #e2e8f0; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         @media (max-width: 850px) { .grid { grid-template-columns: 1fr; } }
         .card {
@@ -69,7 +50,7 @@
             border-bottom: 2px solid #eff6ff; padding-bottom: 8px;
         }
         label { display: block; font-size: 0.84rem; font-weight: 600; margin: 10px 0 5px; color: var(--text); }
-        input[type="text"], select, textarea {
+        input[type="text"], input[type="password"], select, textarea {
             width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
             border-radius: 8px; font-size: 0.88rem; background: #f8fafc; transition: 0.2s;
         }
@@ -132,6 +113,11 @@
         <div class="grid">
             <div class="card">
                 <h2>1. Actividad y Datos del Trabajo</h2>
+
+                <div style="background:#eff6ff; padding:10px 12px; border-radius:8px; border:1px solid #bfdbfe; margin-bottom:12px;">
+                    <label style="margin-top:0; color:#1e3a8a;">🔑 Tu API Key de Google Gemini (se guarda solo en tu navegador):</label>
+                    <input type="password" id="api-key-input" placeholder="Pega aquí tu API Key (AIzaSy...)" oninput="localStorage.setItem('graduando_key', this.value.trim())">
+                </div>
                 
                 <label>Cargar guía de la actividad (.pdf, .docx o .txt):</label>
                 <div class="file-box" onclick="document.getElementById('file-input').click()">
@@ -140,7 +126,7 @@
                 </div>
 
                 <label>Indicaciones de la actividad (se llena al subir archivo o puedes pegar aquí):</label>
-                <textarea id="activity-text" rows="6" placeholder="Pega aquí la rúbrica, preguntas o instrucciones exactas de tu profesor..."></textarea>
+                <textarea id="activity-text" rows="5" placeholder="Pega aquí la rúbrica, preguntas o instrucciones exactas de tu profesor..."></textarea>
 
                 <div class="row-2">
                     <div>
@@ -178,7 +164,7 @@
                 <p style="font-size:0.8rem; color:var(--muted); margin-bottom:8px;">
                     Estas reglas obligan a Gemini a redactar como un estudiante/profesional humano y evitar patrones detectables de IA:
                 </p>
-                <textarea id="humanize-rules" rows="15">1. RITMO Y PERPLEJIDAD NATURAL: Alterna oraciones cortas y directas (8-12 palabras) con oraciones compuestas más elaboradas (20-28 palabras). Evita párrafos simétricos donde todos midan exactamente lo mismo.
+                <textarea id="humanize-rules" rows="16">1. RITMO Y PERPLEJIDAD NATURAL: Alterna oraciones cortas y directas (8-12 palabras) con oraciones compuestas más elaboradas (20-28 palabras). Evita párrafos simétricos donde todos midan exactamente lo mismo.
 2. PROHIBICIÓN DE MULETILLAS DE IA: Nunca uses expresiones cliché como "En conclusión", "Es crucial destacar", "Cabe resaltar", "En el vasto mundo de", "Hoy en día", "Sin lugar a dudas", "En resumen", "A modo de cierre" o "Profundicemos en". Usa conectores orgánicos propios del español académico real (por ejemplo: "A partir de esto", "Dicho escenario muestra que", "En la práctica", "Si se observa con detalle").
 3. FLUIDEZ PROSÓDICA SIN LISTAS MECÁNICAS: Desarrolla las ideas en párrafos cohesivos y argumentados. Evita abusar de viñetas o listas numeradas con negritas al inicio de cada línea (típico formato de chatbot), salvo que la actividad exija explícitamente una tabla o listado.
 4. VOZ ACADÉMICA PROPIA Y CRÍTICA: Redacta en tercera persona (o primera del plural si el taller es grupal) con postura analítica, conectando los conceptos teóricos con ejemplos reales del contexto laboral o profesional colombiano.
@@ -200,13 +186,13 @@
         </div>
     </div>
     <script>
-        // =========================================================================
-        // PEGA TU API KEY DE GOOGLE GEMINI AQUÍ ADENTRO DE LAS COMILLAS:
-        const GEMINI_API_KEY = "PEGA_AQUI_TU_API_KEY";
-        // =========================================================================
-
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cloudflare.com';
         let generatedRawText = "";
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedKey = localStorage.getItem('graduando_key');
+            if (savedKey) document.getElementById('api-key-input').value = savedKey;
+        });
 
         async function handleFileUpload(event) {
             const file = event.target.files[0];
@@ -240,11 +226,12 @@
                 label.textContent = `✅ Archivo cargado: ${file.name}`;
             } catch (err) {
                 console.error(err);
-                label.textContent = `❌ Error al leer el archivo. Intenta copiar y pegar el texto.`;
+                label.textContent = `❌ Error al leer el archivo: ${err.message}`;
             }
         }
 
         async function generateWork() {
+            const apiKey = document.getElementById('api-key-input').value.trim();
             const activity = document.getElementById('activity-text').value.trim();
             const norm = document.getElementById('norm-select').value;
             const length = document.getElementById('length-select').value;
@@ -253,9 +240,9 @@
             const btnGen = document.getElementById('btn-gen');
             const btnDl = document.getElementById('btn-dl');
 
-            if (GEMINI_API_KEY === "PEGA_AQUI_TU_API_KEY" || !GEMINI_API_KEY) {
+            if (!apiKey) {
                 status.className = "status error";
-                status.textContent = "⚠️ Falta poner tu API Key en el código.";
+                status.textContent = "⚠️ Pega tu API Key de Google Gemini en el cuadro azul de arriba.";
                 return;
             }
             if (!activity) {
@@ -285,15 +272,12 @@ ${rules}
 Redacta el contenido completo del trabajo ahora (sin saludos iniciales ni comentarios finales fuera del trabajo):`;
 
             try {
-                const response = await fetch(`https://googleapis.com{GEMINI_API_KEY}`, {
+                const response = await fetch(`https://googleapis.com{apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         contents: [{ parts: [{ text: prompt }] }],
-                        generationConfig: {
-                            temperature: 0.75,
-                            topP: 0.92
-                        }
+                        generationConfig: { temperature: 0.75, topP: 0.92 }
                     })
                 });
 
@@ -331,9 +315,7 @@ Redacta el contenido completo del trabajo ahora (sin saludos iniciales ni coment
             const lineSpacing = (norm === "APA 7") ? 480 : 360;
             const firstLineIndent = (norm === "APA 7") ? 720 : 0;
 
-            const docChildren = [];
-
-            docChildren.push(
+            const docChildren = [
                 new Paragraph({ text: "", spacing: { before: 1200 } }),
                 new Paragraph({
                     alignment: AlignmentType.CENTER,
@@ -360,7 +342,7 @@ Redacta el contenido completo del trabajo ahora (sin saludos iniciales ni coment
                     children: [new TextRun({ text: today, font: fontName, size: 24 })]
                 }),
                 new Paragraph({ children: [new PageBreak()] })
-            );
+            ];
 
             const lines = generatedRawText.split('\n');
             lines.forEach(line => {
@@ -398,9 +380,7 @@ Redacta el contenido completo del trabajo ahora (sin saludos iniciales ni coment
             const doc = new Document({
                 sections: [{
                     properties: {
-                        page: {
-                            margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 }
-                        }
+                        page: { margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } }
                     },
                     children: docChildren
                 }]
